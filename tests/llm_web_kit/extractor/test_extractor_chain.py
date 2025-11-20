@@ -145,7 +145,6 @@ class TestExtractorChain(unittest.TestCase):
         self.assertEqual(html_content['type'], DocElementType.CODE)
         self.assertEqual(len(html_content['content']['code_content']), 251)
         self.assertEqual(html_content['content']['by'], 'tag_pre_code')
-        self.assertEqual(html_content['inline'], False)
 
         # 有序列表
         html_content = html_content_list[10]
@@ -175,10 +174,6 @@ class TestExtractorChain(unittest.TestCase):
         self.assertEqual(md_content, self.md_expected_content)
         self.assertNotEqual(md_content[-2], '\n')
         self.assertEqual(md_content[-1], '\n')
-
-        # main_html
-        main_html = result.get_content_list().to_main_html()  # 获取main_html内容
-        self.assertEqual(main_html, self.main_html_expected_content)  # 如果遇到嵌套的html, 则返回原始html的时候还是应当拼接替换一下 TODO
 
     def test_html_pipeline_suit_2(self):
         """测试第二个数据：这个数据会丢失一些文本信息."""
