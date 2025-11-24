@@ -102,10 +102,12 @@ class TestExtractorChain(unittest.TestCase):
         # 然后是img
         html_content = html_content_list[2]
         self.assertEqual(html_content['type'], DocElementType.IMAGE)
+        self.assertEqual(html_content['bbox'], [])
         self.assertEqual(html_content['content']['title'], 'image-title')
         self.assertEqual(html_content['content']['alt'], 'image-alt')
         self.assertEqual(html_content['content']['url'], 'https://www.test.com/test.png')
-        self.assertEqual(html_content['content']['caption'], '')
+        self.assertEqual(html_content['content']['caption'], [])
+        self.assertEqual(html_content['content']['footnote'], [])
 
         # 然后是simple table
         html_content = html_content_list[4]
@@ -121,6 +123,7 @@ class TestExtractorChain(unittest.TestCase):
         # 然后是list
         html_content = html_content_list[6]
         self.assertEqual(html_content['type'], DocElementType.LIST)
+        self.assertEqual(html_content['bbox'], [])
         self.assertEqual(len(html_content['content']['items']), 2)
         self.assertEqual(html_content['content']['list_attribute'], 'unordered')
         self.assertEqual(html_content['content']['items'][0]['c'], '1')
